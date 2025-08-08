@@ -1,0 +1,28 @@
+@startuml container_diagram
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(employee_kcb, "Сотрудник КЦБ", "Кол-центр банка")
+Person(employee_kcp, "Сотрудник КЦП", "Партнерский кол-центр")
+
+Container_Boundary(deposit, "Депозитный сервис", "Java, Spring Boot") {
+    Container(rate_api, "API ставок", "REST", "Предоставление ставок CRM")
+    Container(file_generator, "Генератор файлов", "Java", "Ежедневная выгрузка CSV с PGP-шифрованием") 
+    Container(sftp_client, "SFTP-клиент", "Java", "Автоматическая загрузка файлов")
+    
+    ContainerDb(deposit_db, "База ставок", "MS SQL", "Хранение актуальных ставок")
+}
+
+Container(crm, "CRM банка", "React + Java", "Система кол-центра")
+ContainerDb(sftp, "SFTP-сервер", "SFTP", "Хранение файлов для партнера")
+System_Ext(partner_system, "Система партнера", "Внешняя CRM")
+
+Rel(employee_kcb, crm, "Просмотр ставок", "HTTPS")
+Rel(crm, rate_api, "Запрос ставок", "REST/HTTPS\n(аутентификация по API-ключу)")
+Rel(rate_api, deposit_db, "Чтение данных", "JDBC")
+Rel(file_generator, deposit_db, "Получение ставок", "JDBC\n(ежедневно в 00:00)")
+Rel(file_generator, sftp_client, "Передача файла", "CSV\n(PGP-шифрование)")
+Rel(sftp_client, sftp, "Загрузка файла", "SFTP\n(повторные попытки при ошибке)")
+Rel(sftp, partner_system, "Доступ к файлам", "SFTP")
+Rel(employee_kcp, partner_system, "Импорт ставок", "Локальный UI")
+
+@enduml

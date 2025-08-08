@@ -1,0 +1,100 @@
+<mxfile host="65bd71144e">
+    <diagram id="2vjPW5S7tkyHpKnyWAeM" name="Page-1">
+        <mxGraphModel dx="1345" dy="824" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="117" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;Участники процессов:&lt;/span&gt;&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent; font-size: 16px; font-weight: normal;&quot;&gt;1. Клинет&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; font-size: 16px; font-weight: normal;&quot;&gt;2. Сотрудник отделения (фронт-офиса) (АБС)&lt;br&gt;3. Оператор кол-центра (Система кол-центра)&lt;br&gt;4. Менеджер депозитов (бэк-офис) (АБС, Excel, Эл. почта)&lt;br&gt;5. Менеджер кредитов (бэк-офис) (АБС, Эл. почта)&lt;br&gt;6. IT-система (СМС-шлюз)&lt;/span&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=16;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="50" width="510" height="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="118" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;Схема интеграции приложений:&lt;/span&gt;&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;background-color: transparent; font-size: 16px; font-weight: normal;&quot;&gt;1. АБС&lt;br&gt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; font-size: 16px; font-weight: normal;&quot;&gt;2. Система кол-центра&lt;br&gt;3. СМС-шлюз&lt;br&gt;4. Эл. почта&lt;br&gt;5. Excel&lt;/span&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fontSize=16;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="400" width="510" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="147" value="Клиент" style="shape=ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="740" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="148" value="Оператор кол-центра" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="740" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="149" value="Система кол-центра" style="shape=hexagon;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="740" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="150" value="АБС" style="shape=cube;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="740" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="151" value="Менеджер депозитов" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="680" y="740" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="152" value="Excel" style="shape=document;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="880" y="740" width="100" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="153" value="СМС-шлюз" style="shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="720" y="840" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="154" value="Почтовая система" style="shape=mxgraph.basic.mail;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="360" y="980" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="155" value="Сотрудник отделения (фронт-офиса)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="160" y="980" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="156" value="Менеджер кредитов" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="1080" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="157" style="endArrow=block;html=1;" edge="1" parent="1" source="147" target="148">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="158" style="endArrow=block;html=1;" edge="1" parent="1" source="148" target="149">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="159" style="endArrow=block;html=1;" edge="1" parent="1" source="149" target="150">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="160" style="endArrow=block;html=1;" edge="1" parent="1" source="150" target="151">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="161" style="endArrow=block;html=1;" edge="1" parent="1" source="151" target="152">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="162" style="endArrow=block;html=1;" edge="1" parent="1" source="151" target="150">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="163" style="endArrow=block;html=1;" edge="1" parent="1" source="150" target="153">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="164" style="endArrow=block;html=1;" edge="1" parent="1" source="153" target="147">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="165" style="endArrow=block;html=1;" edge="1" parent="1" source="147" target="155">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="166" style="endArrow=block;html=1;" edge="1" parent="1" source="155" target="154">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="167" style="endArrow=block;html=1;" edge="1" parent="1" source="154" target="151">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="168" style="endArrow=block;html=1;" edge="1" parent="1" source="151" target="154">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="169" style="endArrow=block;html=1;" edge="1" parent="1" source="154" target="156">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="170" style="endArrow=block;html=1;" edge="1" parent="1" source="156" target="150">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="171" style="endArrow=block;html=1;" edge="1" parent="1" source="156" target="154">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="172" style="endArrow=block;html=1;" edge="1" parent="1" source="154" target="155">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="173" style="endArrow=block;html=1;" edge="1" parent="1" source="155" target="150">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="174" style="edgeStyle=none;html=1;entryX=0.963;entryY=0.879;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="156" target="152">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

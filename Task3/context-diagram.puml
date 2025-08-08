@@ -1,0 +1,36 @@
+@startuml context_diagram
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+
+Person(client, "Клиент", "Физическое лицо, открывающее депозит")
+Person(ccb, "КЦБ", "Сотрудник кол-центра банка")
+Person(ccbp, "КЦП", "Сотрудник кол-центра партнера")
+Person(co, "СО", "Сотрудник отделения")
+Person(md, "ДМ", "Менеджер депозитов (бэк-офис)")
+System(intbank, "Интернет-банк", "Платформа для существующих клиентов")
+System(site, "Сайт банка", "Маркетинговый сайт и приём заявок")
+System(kcs, "CRM Банка", "Система кол-центра банка")
+System_Ext(kcsp, "CRM Партнера", "Система кол-центра партнера")
+System(abs, "АБС", "Автоматизированная банковская система")
+System_Ext(sms, "СМС-шлюз", "Отправка SMS-уведомлений")
+System(deposit_service, "Депозитный сервис", "Управление заявками и расчет ставок")
+' Взаимодействия клиента
+Rel(client, site, "Подает заявку (UC2.1)", "HTTPS")
+Rel(client, intbank, "Авторизуется и открывает депозит (UC1.1, UC1.2)", "HTTPS")
+Rel(client, sms, "Получает SMS-уведомления", "SMS")
+' Взаимодействия сотрудников
+Rel(ccb, kcs, "Обрабатывает заявку (UC2.2)")
+Rel(ccbp, kcsp, "Обрабатывает заявку")
+Rel(co, abs, "Верификация и подписание (UC2.3)")
+Rel(md, abs, "Подтверждение открытия (UC1.4, UC1.5)")
+' Системные взаимодействия
+Rel(site, kcs, "Передает заявку (UC2.1)", "API")
+Rel(kcs, deposit_service, "Передает заявку для обработки", "API")
+Rel(kcsp, deposit_service, "Передает заявку для обработки", "API")
+Rel(intbank, deposit_service, "Передает заявку (UC1.3)", "API")
+Rel(deposit_service, abs, "Регистрирует заявку (асинхронно через Kafka)", "Kafka")
+Rel(abs, sms, "Инициирует отправку SMS (UC1.6)", "API")
+Rel(deposit_service, sms, "Отправка SMS-кода подтверждения", "API")
+' Обратная связь от АБС (например, статус заявки)
+Rel(abs, deposit_service, "Обратная связь о статусе", "Kafka")
+@enduml

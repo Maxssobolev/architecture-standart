@@ -1,0 +1,22 @@
+@startuml context_diagram
+
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(employee_kcb, "Сотрудник КЦБ", "Кол-центр банка")
+Person(employee_kcp, "Сотрудник КЦП", "Партнерский кол-центр")
+
+System_Boundary(bank, "Банк") {
+    System(crm, "CRM банка", "Система кол-центра")
+    System(deposit_service, "Депозитный сервис", "Управление ставками")
+    System(sftp_server, "SFTP-сервер", "Хранение файлов")
+}
+
+System_Ext(partner_system, "Локальная система партнера", "Внешняя система")
+
+Rel(employee_kcb, crm, "Просмотр ставок", "HTTPS")
+Rel(crm, deposit_service, "Запрос ставок", "REST API")
+Rel(deposit_service, sftp_server, "Выгрузка файлов", "SFTP")
+Rel(sftp_server, partner_system, "Доступ к файлам", "SFTP")
+Rel(employee_kcp, partner_system, "Импорт ставок", "Локальный интерфейс")
+
+@enduml
