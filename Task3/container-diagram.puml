@@ -1,0 +1,45 @@
+@startuml container_diagram
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(client, "Клиент", "Физическое лицо")
+System_Boundary(online_systems, "Онлайн-системы") {
+    Container(site, "Сайт банка", "PHP, React.js", "Предоставление информации и приём заявок")
+    Container(ib, "Интернет-банк", "ASP.NET MVC 4.5", "Обслуживание авторизованных клиентов")
+    Container(api_gw, "API Gateway", "Nginx", "Маршрутизация и защита запросов")
+    Container(deposit_service, "Депозитный сервис", "Java Spring Boot", "Управление заявками и ставками")
+    ContainerDb(redis, "Кэш ставок", "Redis", "Хранение справочников и персонализированных ставок")
+}
+System_Boundary(backend_systems, "Бэкенд-системы") {
+    Container(kafka, "Message Broker", "Apache Kafka", "Асинхронная коммуникация")
+    Container(abs_adapter, "Адаптер АБС", "Java", "Буферизация и преобразование запросов")
+    Container(abs, "АБС", "Oracle, PL/SQL", "Основная банковская система")
+    Container(sms, "СМС-шлюз", "Java", "Отправка уведомлений")
+}
+System_Boundary(crm_systems, "CRM-системы") {
+    Container(crm_bank, "CRM Банка", "Платформа подрядчика", "Обработка заявок кол-центром банка")
+    Container_Ext(crm_partner, "CRM Партнера", "Внешняя система", "Обработка заявок партнерским кол-центром")
+}
+' Взаимодействия клиента
+Rel(client, site, "Подает заявку", "HTTPS")
+Rel(client, ib, "Открывает депозит", "HTTPS")
+Rel(sms, client, "Отправка SMS", "SMPP")
+' Взаимодействия сайта и интернет-банка с API Gateway
+Rel(site, api_gw, "Передает заявку", "HTTPS")
+Rel(ib, api_gw, "Отправляет запросы", "HTTPS")
+' Обработка в API Gateway
+Rel(api_gw, deposit_service, "Обрабатывает запросы", "REST/HTTPS")
+' Взаимодействие с CRM
+Rel(crm_bank, deposit_service, "Передает заявки", "API")
+Rel(crm_partner, deposit_service, "Передает заявки", "API (через VPN)")
+' Работа Депозитного сервиса
+Rel(deposit_service, redis, "Чтение/запись ставок", "TCP")
+Rel(deposit_service, kafka, "Отправка заявок в АБС", "Kafka Producer")
+' Обработка в бэкенд-системах
+Rel(kafka, abs_adapter, "Получение сообщений", "Kafka Consumer")
+Rel(abs_adapter, abs, "Передача команд", "JDBC")
+Rel(abs, sms, "Инициирует SMS (статус открытия)", "API")
+Rel(deposit_service, sms, "Инициирует SMS (код подтверждения)", "API")
+' Обратная связь от АБС
+Rel(abs, kafka, "Отправка статусов", "Kafka Producer")
+Rel(kafka, deposit_service, "Получение статусов", "Kafka Consumer")
+@enduml
